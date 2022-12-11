@@ -6,9 +6,10 @@ export class Wallet {
   public seed: Buffer;
   public accounts: Account[];
 
-  static createWallet(seed: string, accountCount: number): Wallet {
+  static getWallet(seed: string, accountCount: number): Wallet {
     const bufSeed = Buffer.from(seed, 'hex');
     const wallet = new Wallet(bufSeed);
+    console.log(accountCount);
     for (let itr = 0; itr < accountCount; itr++) {
       wallet.addAccount();
     }
@@ -31,6 +32,7 @@ export class Wallet {
       nacl.sign.keyPair.fromSeed(derivedSeed!).secretKey
     );
     this.accounts = [...this.accounts, newAccount];
+    sessionStorage.setItem('accounts', `${this.accounts.length + 1}`);
     return newAccount;
   }
 

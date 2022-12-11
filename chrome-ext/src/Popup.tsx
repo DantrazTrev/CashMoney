@@ -28,13 +28,28 @@ const darkTheme = createTheme({
 function App() {
   const [locked, setLocked] = useState(true)
   const [firstUse, setFirstUse] = useState(true)
-
+  const LockListener = () => {
+    setFirstUse(false);
+    setLocked(true)
+  }
+  const UnlockListener = () => {
+    console.log("UNLOCK")
+    setFirstUse(false);
+    setLocked(false)
+  }
   useEffect(() => {
     let account = localStorage.getItem('account');
     if (account) {
       setFirstUse(false)
     }
+    window.addEventListener('lock', LockListener);
+    window.addEventListener('unlock', UnlockListener);
 
+    return () => {
+      window.removeEventListener('lock', LockListener);
+      window.removeEventListener('unlock', UnlockListener);
+
+    }
   }, [])
 
   return (

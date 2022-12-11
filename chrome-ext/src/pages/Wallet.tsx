@@ -1,7 +1,7 @@
 import React from 'react';
 import '../App.css';
 import BottomNav from '../components/BottomNavigation';
-import { ConnectionProvider } from '../utils/solana';
+import { ConnectionProvider } from '../utils/connections';
 
 function Wallet() {
     return (

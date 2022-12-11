@@ -2,7 +2,8 @@ import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Header from '../components/Header';
-import { login } from '../utils/secretboxutils';
+import { loadMnemonicAndSeed, login } from '../utils/secretboxutils';
+import { unlockWallet } from '../utils/middleware';
 
 function Lock() {
     const passwordRef = useRef<HTMLInputElement | undefined>()
@@ -12,7 +13,7 @@ function Lock() {
             onSubmit={(e) => {
                 e.preventDefault()
                 if (passwordRef.current?.value)
-                    login(passwordRef.current.value)
+                    unlockWallet(passwordRef.current.value)
             }}
             display="flex"
             justifyContent="center"
