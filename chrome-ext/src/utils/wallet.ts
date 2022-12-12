@@ -23,7 +23,6 @@ export class Wallet {
 
   addAccount() {
     const accountIndex = this.accounts.length;
-    console.log(this.seed, 'idx');
 
     const derivedSeed = bip32
       .fromSeed(new Buffer(this.seed))
@@ -32,7 +31,6 @@ export class Wallet {
       nacl.sign.keyPair.fromSeed(derivedSeed!).secretKey
     );
     this.accounts = [...this.accounts, newAccount];
-    sessionStorage.setItem('accounts', `${this.accounts.length + 1}`);
     return newAccount;
   }
 

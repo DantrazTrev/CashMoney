@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Header from '../components/Header';
-import { createSecretBox, createMnS, MnemonicAndSeed } from '../utils/secretboxutils';
 import { Button } from '@mui/material';
 import { uid } from 'uid'
 import { LockEvent } from '../utils/events';

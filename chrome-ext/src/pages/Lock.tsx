@@ -2,7 +2,6 @@ import React, { useRef } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Header from '../components/Header';
-import { loadMnemonicAndSeed, login } from '../utils/secretboxutils';
 import { unlockWallet } from '../utils/middleware';
 
 function Lock() {

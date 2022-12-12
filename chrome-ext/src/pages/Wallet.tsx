@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import '../App.css';
-import BottomNav from '../components/BottomNavigation';
-import { ConnectionProvider } from '../utils/connections';
+import WalletUI from '../components/Walletui';
+import { ConnectionProvider } from '../providers/connections';
+import { WalletContext } from '../providers/wallet';
 
-function Wallet() {
+
+function WalletBase() {
+
+
+
     return (
         <ConnectionProvider>
             <header className="App-header">
             </header>
-            <BottomNav />
+            <WalletUI />
         </ConnectionProvider >
+
     );
 }
 
-export default Wallet;
+export default WalletBase;

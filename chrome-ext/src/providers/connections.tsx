@@ -1,9 +1,9 @@
 import React, { ReactNode } from 'react';
 import { Connection } from '@solana/web3.js';
 
-const ConnectionContext = React.createContext<{
-  connection: Connection;
-} | null>(null);
+export const ConnectionContext = React.createContext<{
+  connection: Connection | null;
+}>({ connection: null });
 
 interface Props {
   children?: ReactNode

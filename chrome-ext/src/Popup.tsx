@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './App.css';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Lock from './pages/Lock';
-import Wallet from './pages/Wallet';
+import WalletBase from './pages/Wallet';
 import Inital from './pages/Initial';
+import { WalletContext } from './providers/wallet';
+import { Wallet } from './utils/wallet';
 
 const darkTheme = createTheme({
   palette: {
@@ -28,14 +30,17 @@ const darkTheme = createTheme({
 function App() {
   const [locked, setLocked] = useState(true)
   const [firstUse, setFirstUse] = useState(true)
+  const wallet = useRef<Wallet | null>(null)
+
   const LockListener = () => {
     setFirstUse(false);
     setLocked(true)
   }
-  const UnlockListener = () => {
-    console.log("UNLOCK")
+  const UnlockListener = (e: any) => {
     setFirstUse(false);
     setLocked(false)
+    console.log(e)
+    wallet.current = e.detail
   }
   useEffect(() => {
     let account = localStorage.getItem('account');
@@ -46,6 +51,8 @@ function App() {
     window.addEventListener('unlock', UnlockListener);
 
     return () => {
+      wallet.current = null
+
       window.removeEventListener('lock', LockListener);
       window.removeEventListener('unlock', UnlockListener);
 
@@ -54,14 +61,15 @@ function App() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className="App">
-        {firstUse ? <Inital /> :
-          locked ?
-            <Lock />
-            : <Wallet />}
-      </div>
+      <WalletContext.Provider value={{ wallet: wallet.current }}>
+        <div className="App">
+          {firstUse ? <Inital /> :
+            locked ?
+              <Lock />
+              : <WalletBase />}
+        </div>
+      </WalletContext.Provider >
     </ThemeProvider >
-
   );
 }
 

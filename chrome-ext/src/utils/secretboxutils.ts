@@ -3,7 +3,6 @@ import bs58 from 'bs58';
 import { pbkdf2 } from 'crypto';
 import * as bip32 from 'bip32';
 import { Wallet } from './wallet';
-import { UnlockEvent } from './events';
 export const login = (password: string) => {};
 export type MnemonicAndSeed = {
   mnemonic: string;
@@ -13,7 +12,7 @@ export type MnemonicAndSeed = {
 export type SecretBox = {
   nonce: string;
   kdf: string; // pbkdf2
-  encryptedBox: string;
+  encrypted: string;
   salt: string;
   iterations: number;
   digest: string; //sha256
@@ -22,9 +21,10 @@ export type SecretBox = {
 export const createSecretBox = async (
   mnemonic: string,
   seed: string,
-  password: string
+  password: string,
+  accountIndex: number = 1
 ) => {
-  const plaintext = JSON.stringify({ mnemonic, seed });
+  const plaintext = JSON.stringify({ mnemonic, seed, accountIndex });
   const salt = randomBytes(16);
   const kdf = 'pbkdf2';
   const iterations = 100000;
@@ -49,7 +49,7 @@ export const createSecretBox = async (
 
       sessionStorage.removeItem('unlocked');
 
-      let wallet = Wallet.getWallet(seed, 1);
+      let wallet = Wallet.getWallet(seed, accountIndex);
 
       let selectedAccount = wallet.accounts[0].publicKey.toBase58();
       console.log(selectedAccount);
@@ -108,14 +108,21 @@ export async function loadMnemonicAndSeed(password: string) {
   }
 
   const decodedPlaintext = Buffer.from(plaintext).toString();
-  const { mnemonic, seed, derivationPath } = JSON.parse(decodedPlaintext);
+  const { mnemonic, seed, derivationPath, accountIndex } =
+    JSON.parse(decodedPlaintext);
 
   sessionStorage.setItem('unlocked', decodedPlaintext);
 
   const importsEncryptionKey = deriveImportsEncryptionKey(seed);
-  let data = { mnemonic, seed, importsEncryptionKey, derivationPath };
-  console.log(data, plaintext);
-  return { mnemonic, seed, derivationPath };
+  let data = {
+    mnemonic,
+    seed,
+    importsEncryptionKey,
+    derivationPath,
+    accountIndex,
+  };
+  console.log(data);
+  return { mnemonic, seed, derivationPath, accountIndex };
 }
 function deriveImportsEncryptionKey(seed: string) {
   return bip32.fromSeed(Buffer.from(seed, 'hex')).derivePath("m/10016'/0")
