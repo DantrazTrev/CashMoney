@@ -45,6 +45,7 @@ export const createSecretBox = async (
           digest,
         })
       );
+      localStorage.setItem('accounts', `${accountIndex}`);
       localStorage.removeItem('unlocked');
 
       sessionStorage.removeItem('unlocked');
@@ -59,6 +60,44 @@ export const createSecretBox = async (
       throw new Error(`Unable to encrypt box: ${err}`);
     });
 };
+
+// export const updateSecretBox = async (accountIndex: number) => {
+//   let { mnemonic, seed } = await loadMnemonicAndSeed(password);
+//   const plaintext = JSON.stringify({ mnemonic, seed, accountIndex });
+//   const salt = randomBytes(16);
+//   const kdf = 'pbkdf2';
+//   const iterations = 100000;
+//   const digest = 'sha256';
+//   deriveEncryptionKey(password, salt, iterations, digest)
+//     .then((key) => {
+//       const nonce = randomBytes(secretbox.nonceLength);
+//       const encrypted = secretbox(Buffer.from(plaintext), nonce, key);
+
+//       localStorage.setItem(
+//         'locked',
+//         JSON.stringify({
+//           encrypted: bs58.encode(encrypted),
+//           nonce: bs58.encode(nonce),
+//           kdf,
+//           salt: bs58.encode(salt),
+//           iterations,
+//           digest,
+//         })
+//       );
+//       localStorage.removeItem('unlocked');
+
+//       sessionStorage.removeItem('unlocked');
+
+//       let wallet = Wallet.getWallet(seed, accountIndex);
+
+//       let selectedAccount = wallet.accounts[0].publicKey.toBase58();
+//       console.log(selectedAccount);
+//       return selectedAccount;
+//     })
+//     .catch((err) => {
+//       throw new Error(`Unable to encrypt box: ${err}`);
+//     });
+// };
 
 export const createMnS = async (): Promise<MnemonicAndSeed> => {
   const bip39 = await import('bip39');
@@ -108,10 +147,12 @@ export async function loadMnemonicAndSeed(password: string) {
   }
 
   const decodedPlaintext = Buffer.from(plaintext).toString();
-  const { mnemonic, seed, derivationPath, accountIndex } =
-    JSON.parse(decodedPlaintext);
+  const { mnemonic, seed, derivationPath } = JSON.parse(decodedPlaintext);
 
   sessionStorage.setItem('unlocked', decodedPlaintext);
+  let accountIndex = localStorage.getItem('accounts')
+    ? Number(localStorage.getItem('accounts'))
+    : 1;
 
   const importsEncryptionKey = deriveImportsEncryptionKey(seed);
   let data = {

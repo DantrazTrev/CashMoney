@@ -1,10 +1,17 @@
-import { Connection } from '@solana/web3.js';
+import {
+  Account,
+  Connection,
+  LAMPORTS_PER_SOL,
+  PublicKey,
+  GetProgramAccountsFilter,
+} from '@solana/web3.js';
 import { LockEvent, UnlockEvent } from './events';
 import {
   createMnS,
   createSecretBox,
   loadMnemonicAndSeed,
 } from './secretboxutils';
+import { getSPLBal, getTokenValue } from './tokens';
 import { Wallet } from './wallet';
 
 export const unlockWallet = async (password: string) => {
@@ -24,20 +31,30 @@ export const createWallet = async (password: string) => {
   return { mnemonic, seed, account };
 };
 
-// export const getBalanceInfo = async (
-//   connection: Connection,
-//   tokenGetter: (mintAddress: string) => Token | undefined,
-//   ownedAccount: OwnedAccount<Buffer>
-// ): Promise<BalanceInfo> => {
-//   return {
-//     amount: BigInt(ownedAccount.accountInfo.lamports ?? 0),
-//     owner: ownedAccount.publicKey,
-//     lamports: BigInt(ownedAccount.accountInfo.lamports ?? 0),
-//     token: {
-//       mintAddress: 'Asdfasdf',
-//       decimals: 9,
-//       name: '',
-//       symbol: 'SOL',
-//     },
-//   };
-// };
+export const getBalance = async (account: Account, connection: Connection) => {
+  console.log(account);
+  if (account === undefined) return null;
+  let solbalance = await getSolBalance(account, connection);
+  let splbalance = await getSPLBal(connection, account.publicKey);
+
+  return { tokens: splbalance, solana: solbalance };
+};
+export const getSolBalance = async (
+  account: Account,
+  connection: Connection
+) => {
+  if (account === undefined) return null;
+  let balance = await connection.getBalance(account.publicKey);
+  let value = await getTokenValue('solana', 'usd');
+  return {
+    name: 'solana',
+    value: (balance / LAMPORTS_PER_SOL) * value,
+    token: balance / LAMPORTS_PER_SOL,
+  };
+};
+
+export interface Token {
+  name: string;
+  token: number;
+  value: number;
+}
