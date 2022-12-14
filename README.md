@@ -1,46 +1,23 @@
-# Getting Started with Create React App
+# Cash Money yo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Download the [crx file](https://github.com/DantrazTrev/CashMoney/raw/master/extension/build.crx)
 
 ## Available Scripts
 
-In the project directory, you can run:
+### `npm run build` 
 
-### `npm start`
+## Screenshots
+`<img width="398" alt="Screenshot 2022-12-14 at 17 56 58" src="https://user-images.githubusercontent.com/43457420/207595090-e9453d4e-e37c-48a5-883c-3e2062d19af9.png">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
+<img width="369" alt="Screen
+shot 2022-12-14 at 17 57 44" src="https://user-images.githubusercontent.com/43457420/207595242-a0b04992-62d1-4855-91ac-e6b7d8434510.png">
+<img width="360" alt="Screenshot 2022-12-14 at 17 58 06" src="https://user-images.githubusercontent.com/43457420/207595292-e1a6c4e2-89b3-4f44-9a9e-be60f8c17d9c.png">
+<img width="292" alt="Screenshot 2022-12-14 at 17 58 21" src="https://user-images.githubusercontent.com/43457420/207595339-1a0c7568-818d-413a-a1f3-0fa648014768.png">
+<img width="396" alt="Screenshot 2022-12-14 at 18 02 35" src="https://user-images.githubusercontent.com/43457420/207596203-f85407b2-d954-4bfb-ab4c-035263795e41.png">
+<img width="580" alt="Screenshot 2022-12-14 at 18 02 58" src="https://user-images.githubusercontent.com/43457420/207596242-ea1feeee-67b3-49ff-831d-68b39ab768d0.png">
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+<img width="391" alt="Screenshot 2022-12-14 at 17 57 20" src="https://user-images.githubusercontent.com/43457420/207595155-2b3ec793-15e2-4cb6-a261-c8d5e826edca.png">
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The build is minified and the filenames include the hashes and can be used as an unpacked extension
