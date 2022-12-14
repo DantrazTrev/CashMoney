@@ -1,0 +1,14 @@
+{
+  "name": "Cash Money",
+  "description": "An Open Source Solana Wallet",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Cash Money",
+    "default_icon": {
+      "16": "logo192.png"
+    }
+  },
+  "permissions": ["storage", "activeTab"]
+}
