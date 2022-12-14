@@ -1,10 +1,22 @@
 # Cash Money yo
 
 Download the [crx file](https://github.com/DantrazTrev/CashMoney/raw/master/extension/build.crx)
+  
+ ## Tasks Completed
+- [x] View Balance
+- [x] Send Tokens
+- [x] Recieve Tokens
+- [x] Export Accounts
+- [ ] Import Wallets 
+
+ ## Comments 
+ - Some issue with account compatibilty between different wallets (might lead to different wallets )
+ - Crx file isn't working without a valid chrome signature
 
 ## Available Scripts
 
 ### `npm run build` 
+build folder has the unpacked extenions
 
 ## Screenshots
 `<img width="398" alt="Screenshot 2022-12-14 at 17 56 58" src="https://user-images.githubusercontent.com/43457420/207595090-e9453d4e-e37c-48a5-883c-3e2062d19af9.png">
