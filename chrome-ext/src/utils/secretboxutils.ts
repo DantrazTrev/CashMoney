@@ -142,6 +142,7 @@ export async function loadMnemonicAndSeed(password: string) {
 
   const key = await deriveEncryptionKey(password, salt, iterations, digest);
   const plaintext = secretbox.open(encrypted, nonce, key);
+  console.log(plaintext, 'pl');
   if (!plaintext) {
     throw new Error('Incorrect password');
   }
@@ -166,6 +167,6 @@ export async function loadMnemonicAndSeed(password: string) {
   return { mnemonic, seed, derivationPath, accountIndex };
 }
 function deriveImportsEncryptionKey(seed: string) {
-  return bip32.fromSeed(Buffer.from(seed, 'hex')).derivePath("m/10016'/0")
+  return bip32.fromSeed(Buffer.from(seed, 'hex')).derivePath("m/44'/501'/0'/0'")
     .privateKey;
 }

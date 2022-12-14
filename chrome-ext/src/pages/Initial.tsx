@@ -37,7 +37,7 @@ function Initial() {
                 <Button onClick={() => {
                     setPage(Pages.Create)
                 }} color='primary' variant="contained">Create a new Wallet</Button>
-                <Button onClick={() => {
+                <Button disabled={true} onClick={() => {
                     setPage(Pages.Import)
                 }} color='primary' variant="contained">Import a wallet</Button>
             </Box>

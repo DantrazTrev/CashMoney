@@ -46,7 +46,6 @@ export class Wallet {
     );
     this.accounts = [...this.accounts, newAccount];
     localStorage.setItem('accounts', `${accountIndex}`);
-    console.log(derivedSeed, 'here');
 
     return newAccount;
   }

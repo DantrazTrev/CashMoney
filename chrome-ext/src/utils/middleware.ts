@@ -21,6 +21,13 @@ export const unlockWallet = async (password: string) => {
   window.dispatchEvent(UnlockEvent(account));
 };
 
+export const validatePassword = async (
+  password: string
+): Promise<any | Error> => {
+  const { mnemonic, accountIndex } = await loadMnemonicAndSeed(password);
+  return { mnemonic };
+};
+
 export const lockWallet = (password: string) => {
   window.dispatchEvent(LockEvent);
 };

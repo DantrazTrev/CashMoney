@@ -1,6 +1,8 @@
-import { Box, List, ListItem } from '@mui/material';
+import { Box, Button, List, ListItem } from '@mui/material';
 import { Account } from '@solana/web3.js';
 import React, { useState } from 'react'
+import Header from '../components/Header';
+import Transx from '../components/Transx';
 import { ConnectionContext } from '../providers/connections';
 import { getTransactions } from '../utils/tranx';
 
@@ -9,7 +11,7 @@ interface Props {
 }
 
 
-function Balances(props: Props) {
+function Transxs(props: Props) {
 
 
     const [transactions, setTx] = useState<any[]>([])
@@ -36,19 +38,24 @@ function Balances(props: Props) {
         >
             <Box
                 sx={{
-                    marginTop: 5,
+                    marginTop: 2,
 
                 }}>
-
+                <Header text={"Recent Transcations"} />
             </Box>
-            <List>
-                {transactions.map((item: any) => {
 
-                    return (<ListItem></ListItem>)
+            <List sx={{ maxHeight: '400px', overflow: "scroll" }}>
+                {transactions.map((transx) => {
+                    return (
+                        <ListItem key={transx.signature} >  <Transx transaction={transx} account={props.account} /></ListItem>
+                    )
                 })}
+
+                <ListItem sx={{ justifyContent: 'center' }} key='all'><Button onClick={() => { window.open(`https://solscan.io/account/${props.account?.publicKey.toString()}`) }}>All Transactions</Button></ListItem>
+
             </List>
         </Box>
     )
 }
 
-export default Balances
+export default Transxs

@@ -13,7 +13,7 @@ interface Props {
 export const ConnectionProvider = (props: Props) => {
   const connection = new Connection(
     'https://little-clean-snowflake.solana-mainnet.discover.quiknode.pro/e9d3555577675c8162c59ad40f155cbeba3aaa3b/',
-    'single'
+    'confirmed'
   );
   return (
     <ConnectionContext.Provider value={{ connection }}>
